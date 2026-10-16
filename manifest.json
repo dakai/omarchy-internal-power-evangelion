@@ -1,0 +1,46 @@
+{
+  "schemaVersion": 1,
+  "id": "evangelion.internal-power",
+  "name": "EVANGELION Internal Power Timer",
+  "version": "1.0.0",
+  "author": "remulef",
+  "license": "MIT",
+  "description": "Battery time left as the Evangelion internal power countdown (活動限界まで). Seven-segment timer in the bar and popup, plus an alert when the umbilical cable is pulled.",
+  "kinds": [
+    "bar-widget",
+    "service"
+  ],
+  "entryPoints": {
+    "barWidget": "Panel.qml",
+    "service": "Service.qml"
+  },
+  "barWidget": {
+    "displayName": "EVA Internal Power",
+    "description": "Evangelion internal power countdown for the battery",
+    "category": "System",
+    "aliases": ["eva", "battery-timer", "umbilical"],
+    "allowMultiple": false,
+    "defaultSection": "right",
+    "defaults": {
+      "hideOnExternal": false,
+      "criticalMinutes": 10
+    },
+    "schema": [
+      {
+        "key": "hideOnExternal",
+        "type": "boolean",
+        "label": "Hide while plugged in",
+        "defaultValue": false
+      },
+      {
+        "key": "criticalMinutes",
+        "type": "integer",
+        "label": "Critical threshold (minutes)",
+        "min": 1,
+        "max": 60,
+        "step": 1,
+        "defaultValue": 10
+      }
+    ]
+  }
+}
