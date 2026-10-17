@@ -21,6 +21,17 @@ Panel {
 
   readonly property bool hideOnExternal: setting("hideOnExternal", false) === true
   readonly property int criticalMinutes: Number(setting("criticalMinutes", 10))
+  readonly property bool hideLabels: setting("hideLabels", false) === true
+
+  function saveSetting(key, value) {
+    var next = Object.assign({}, root.settings)
+    next[key] = value
+    root.settings = next
+    if (root.bar && root.bar.shell && typeof root.bar.shell.updateEntryInline === "function")
+      root.bar.shell.updateEntryInline(root.moduleName, next)
+  }
+
+  function toggleLabels() { saveSetting("hideLabels", !root.hideLabels) }
 
   readonly property var device: UPower.displayDevice
   readonly property bool present: !!(device && device.isPresent)
@@ -156,6 +167,7 @@ Panel {
     useActiveColor: false
     text: {
       if (root.vertical) return root.internal ? "内" : "外"
+      if (root.hideLabels) return Math.round(root.fraction * 100) + "%"
       return (root.internal ? "内部電源 " : "外部電源 ") + Math.round(root.fraction * 100) + "%"
     }
     dimmed: root.critical && !root.blinkPhase
@@ -164,7 +176,7 @@ Panel {
       : "外部電源 — umbilical cable connected")
       + (root.profileLabels[root.activeProfile] ? "\n" + root.profileLabels[root.activeProfile].jp + " " + root.profileLabels[root.activeProfile].en : "")
     onPressed: function(b) {
-      if (b === Qt.RightButton) root.cycleProfile()
+      if (b === Qt.RightButton) root.toggleLabels()
       else root.toggle()
     }
   }

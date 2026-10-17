@@ -14,7 +14,7 @@ the seven-segment timer that starts when the umbilical cable is pulled.
 - On AC: `外部電源 NN%` in EVA-01 lime.
 - Hover: the countdown (`活動限界まで 02:35:58`) and the current power mode.
 - Left click: opens the internal power screen.
-- Right click: cycles the power mode.
+- Right click: toggles hiding the "内部電源"/"外部電源" labels.
 
 **Popup**
 

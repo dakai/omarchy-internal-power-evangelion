@@ -23,7 +23,8 @@
     "defaultSection": "right",
     "defaults": {
       "hideOnExternal": false,
-      "criticalMinutes": 10
+      "criticalMinutes": 10,
+      "hideLabels": false
     },
     "schema": [
       {
@@ -40,6 +41,12 @@
         "max": 60,
         "step": 1,
         "defaultValue": 10
+      },
+      {
+        "key": "hideLabels",
+        "type": "boolean",
+        "label": "Hide internal/external power label",
+        "defaultValue": false
       }
     ]
   }
